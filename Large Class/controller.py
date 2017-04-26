@@ -84,6 +84,8 @@ class Controller(AbstractController):
 
     def serialise_objects(self, path):
         try:
+            if os.path.exists(path) == False:
+                raise IOError
             if self.model.employees.__len__() != 0:
                 path += '/data.pickle'
                 sf = self.serialization.open(path, "wb")
@@ -115,12 +117,13 @@ class Controller(AbstractController):
             self.model.employees += list(new)
             for e in new:
                 self.__view.show(e)
+            f.close() 
         except IOError:
             self.__view.show('error : wrong path')
         except ValueError:
             self.__view.show('data error')
-        finally:
-            f.close() 
+        except AttributeError:
+            self.__view.show('error : wrong path')
 
     def display_bar(self):
         try:
@@ -130,7 +133,7 @@ class Controller(AbstractController):
                 except OSError:
                     pass
                 self.bar_chart.title = 'Salary by Age'
-                self.bar_chart.delete('Salary')
+                #self.bar_chart.delete('Salary')
                 self.bar_chart.add('Salary', self.model.get_all_salaries())
 
                 age_list = []

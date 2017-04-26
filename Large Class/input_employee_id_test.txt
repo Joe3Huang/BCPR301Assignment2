@@ -1,0 +1,17 @@
+>>> import os
+>>> import sys
+>>> sys.path.append(os.getcwd())
+>>> sys.path.append('../code')
+>>> from cmd_view import CLI
+>>> from controller import Controller
+>>> from model import Model
+>>> cli = CLI()
+>>> model = Model()
+>>> ctl = Controller(cli, model)
+>>> cli.set_controller(ctl)
+
+
+>>> from unittest.mock import patch
+>>> import builtins
+
+>>> with patch('builtins.input', return_value='M'):assert ctl.input_gender() == {"Gender": 'M'}

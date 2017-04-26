@@ -70,6 +70,12 @@ class DB(object):
         finally:
             self.close()
 
+    def delete_all_data(self):
+        self.db_connect()
+        self.db_cursor.execute("DELETE FROM employee;")
+        self.commit()
+        self.close()
+
 
 # staff_data = [('T123', 'M', '20', '654', 'Normal', '56', '10-18-1996'),
 # 				('T124', 'M', '20', '654', 'Normal', '56', '10-18-1996'),

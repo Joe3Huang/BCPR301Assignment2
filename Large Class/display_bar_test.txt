@@ -1,22 +1,23 @@
 >>> import os
 >>> import sys
 >>> sys.path.append(os.getcwd())
->>> sys.path.append('..\code')
->>> from controller import Controller
+>>> sys.path.append('../code')
 >>> from cmd_view import CLI
+>>> from controller import Controller
 >>> from model import Model
 >>> cli = CLI()
 >>> model = Model()
 >>> ctl = Controller(cli, model)
 >>> cli.set_controller(ctl)
+
+
+
+>>> ctl.display_bar()
+data error
+
 >>> path = os.getcwd();
 >>> path += '\\testData.txt';
 >>> ctl.load_file(path)
 success
->>> path = os.getcwd();
->>> path += '\\wrongTestData.txt';
->>> ctl.load_file(path)
-invalid data detected
-success
 
-
+>>> ctl.display_bar()

@@ -115,12 +115,13 @@ class Controller(AbstractController):
             self.model.employees += list(new)
             for e in new:
                 self.__view.show(e)
+            f.close() 
         except IOError:
             self.__view.show('error : wrong path')
         except ValueError:
             self.__view.show('data error')
-        finally:
-            f.close() 
+        except AttributeError:
+            self.__view.show('error : wrong path')
 
     def display_bar(self):
         try:
