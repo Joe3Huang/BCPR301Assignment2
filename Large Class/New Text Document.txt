@@ -1,0 +1,35 @@
+>>> from unittest.mock import MagicMock
+>>> from unittest.mock import patch
+>>> import os
+>>> import sys
+>>> from io import StringIO
+>>> sys.path.append(os.getcwd())
+>>> sys.path.append('../code')
+>>> from cmd_view import CLI
+>>> from controller import Controller
+>>> from model import Model
+>>> cli = CLI()
+>>> model = Model()
+>>> ctl = Controller(cli, model)
+>>> cli.set_controller(ctl)
+>>> ctl.print_all_data()
+not data
+>>> import builtins
+>>> patch('builtins.True', AlmostAlwaysTrue(4)):
+>>> builtins.raw_input = MagicMock(return_value="Y666")
+>>> out = StringIO()
+>>> sys.stdout = out
+>>> ctl.input_employee_id()
+>>> output = out.getvalue().strip()
+>>> assert output == 'Y666'
+>>> patch('builtins.input', return_value='Y666'):ctl.input_employee_id()
+
+
+
+>>> with patch('builtins.input', return_value='Y666'): assert ctl.input_employee_id() == {"EMPID": 'Y666'}
+
+
+
+
+>>> import builtins
+>>> with patch('builtins.input', side_effect=[M]):assert ctl.new_employee() == {"EMPID": 'Y666'}

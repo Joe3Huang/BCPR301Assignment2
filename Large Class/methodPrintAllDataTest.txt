@@ -1,0 +1,21 @@
+>>> import os
+>>> import sys
+>>> sys.path.append(os.getcwd())
+>>> sys.path.append('../code')
+>>> from cmd_view import CLI
+>>> from controller import Controller
+>>> from model import Model
+>>> cli = CLI()
+>>> model = Model()
+>>> ctl = Controller(cli, model)
+>>> cli.set_controller(ctl)
+>>> ctl.print_all_data()
+not data
+
+>>> path = os.getcwd();
+>>> path += '\\testData.txt';
+>>> ctl.load_file(path)
+success
+>>> ctl.print_all_data()
+G834,M,26,213,Overweight,566,04-12-1990
+

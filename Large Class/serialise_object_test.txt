@@ -1,0 +1,32 @@
+>>> import os
+>>> import sys
+>>> sys.path.append(os.getcwd())
+>>> sys.path.append('../code')
+>>> from cmd_view import CLI
+>>> from controller import Controller
+>>> from model import Model
+>>> cli = CLI()
+>>> model = Model()
+>>> ctl = Controller(cli, model)
+>>> cli.set_controller(ctl)
+
+
+#data error
+>>> path = os.getcwd();
+>>> ctl.serialise_objects(path)
+data error
+
+#ok
+>>> path = os.getcwd();
+>>> path += '\\testData.txt';
+>>> ctl.load_file(path)
+success
+>>> path = os.getcwd();
+>>> ctl.serialise_objects(path)
+ok
+
+
+# wrong path
+>>> path = os.getcwd() + '//wrongFolder';
+>>> ctl.serialise_objects(path)
+error : wrong path
