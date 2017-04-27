@@ -15,3 +15,7 @@
 >>> import builtins
 
 >>> with patch('builtins.input', return_value='1'):assert ctl.input_BMI() == {"BMI": 'Normal'}
+1 Normal
+2 Overweight
+3 Obesity
+4 Underweight

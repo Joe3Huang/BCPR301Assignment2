@@ -13,7 +13,7 @@ def test():
     doctest.testfile("input_age_test.txt", verbose=1)
     doctest.testfile("input_employee_id_test.txt", verbose=1)
     doctest.testfile("input_sales_test.txt", verbose=1)
-    doctest.testfile("input_BMI.txt", verbose=1)
+    doctest.testfile("input_BMI_test.txt", verbose=1)
     doctest.testfile("input_salary_test.txt", verbose=1)
     doctest.testfile("input_birthday_test.txt", verbose=1)
 if __name__ == "__main__":

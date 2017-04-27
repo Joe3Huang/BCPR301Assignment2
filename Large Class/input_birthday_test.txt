@@ -14,4 +14,4 @@
 >>> from unittest.mock import patch
 >>> import builtins
 
->>> with patch('builtins.input', return_value='04-12-1991'):assert ctl.input_salary() == {"Birthday": '04-12-1991'}
+>>> with patch('builtins.input', return_value='04-12-1991'):assert ctl.input_birthday() == {"Birthday": '04-12-1991'}
