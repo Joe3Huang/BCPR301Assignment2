@@ -1,8 +1,12 @@
+>>> from initailize import init 
 >>> import os
 >>> import sys
 >>> sys.path.append(os.getcwd())
->>> sys.path.append('../code')
+>>> code_path = init()
+>>> sys.path.append(code_path)
 >>> from cmd_view import CLI
+>>> from importlib.machinery import SourceFileLoader
+>>> controller = SourceFileLoader("controller", os.getcwd()+"//controller.py").load_module()
 >>> from controller import Controller
 >>> from model import Model
 >>> cli = CLI()
@@ -10,7 +14,7 @@
 >>> ctl = Controller(cli, model)
 >>> cli.set_controller(ctl)
 
-
+>>> ctl.db.delete_all_data()
 >>> ctl.db_load()
 not data in database
 no data
@@ -23,7 +27,6 @@ success
 
 >>> ctl.db_save()
 insert data success
-<BLANKLINE>
 ok
 
 #get data from DB successfully

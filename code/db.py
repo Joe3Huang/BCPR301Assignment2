@@ -42,9 +42,9 @@ class DB(object):
                     id=p[0], gender=p[1], age=p[2], sales=p[3], bmi=p[4], salary=p[5], birthday=p[6])
                 try:
                     self.db_cursor.execute(sql_command)
-                    result += "insert data success \n"
+                    result += "insert data success"
                 except Exception as e:
-                    result += "insert data fail \n"
+                    result += "insert data fail"
                 time.sleep(0.25)
         except Exception as e:
             result = "database saving fail"
