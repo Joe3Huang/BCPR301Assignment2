@@ -1,0 +1,36 @@
+>>> from initailize import init 
+>>> import os
+>>> import sys
+>>> sys.path.append(os.getcwd())
+>>> code_path = init()
+>>> sys.path.append(code_path)
+>>> from importlib.machinery import SourceFileLoader
+>>> controller = SourceFileLoader("controller", os.getcwd()+"//controller.py").load_module()
+>>> from controller import Controller
+>>> from cmd_view import CLI
+>>> from model import Model
+>>> cli = CLI()
+>>> model = Model()
+>>> ctl = Controller(cli, model)
+>>> cli.set_controller(ctl)
+
+
+#data error
+>>> path = os.getcwd();
+>>> ctl.serialise_objects(path)
+data error
+
+#ok
+>>> path = os.getcwd();
+>>> path += '\\testData.txt';
+>>> ctl.load_file(path)
+success
+>>> path = os.getcwd();
+>>> ctl.serialise_objects(path)
+ok
+
+
+# wrong path
+>>> path = os.getcwd() + '//wrongFolder';
+>>> ctl.serialise_objects(path)
+error : wrong path

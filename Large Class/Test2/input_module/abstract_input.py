@@ -3,5 +3,5 @@ from abc import ABCMeta, abstractmethod
 
 class AbstractInput(metaclass=ABCMeta):
     @abstractmethod
-    def input(self, data):
+    def input(self):
         pass
