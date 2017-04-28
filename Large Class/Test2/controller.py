@@ -40,7 +40,7 @@ class Controller(AbstractController):
         self.serialization = Serialization()
         self.bar_chart = Bar_chart()
         self.db = DB("company.db")
-        self.input_compositor = InputCompositor(self.validator, self.__view)
+        self.input_compositor = InputCompositor()
         self.input_compositor.add(InputSales(self.validator, self.__view))
         self.input_compositor.add(InputSalary(self.validator, self.__view)) 
         self.input_compositor.add(InputGender(self.validator, self.__view))

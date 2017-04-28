@@ -12,12 +12,12 @@ class InputAge(AbstractInput):
     def input(self):
         while True:
             try:
-                input_data = self.view.input("Please input employee ID : ")
-                if self.validator.is_valid_employee_id(input_data):
+                input_data = self.view.input("Please input two digit age : ")
+                if self.validator.is_valid_age(input_data):
                     break
                 else:
-                    self.view.show("That was no valid id.  Try again...")
+                    self.view.show("That was no valid input.  Try again...")
             except ValueError:
                 self.view.show(
                     "Oops!  That was no valid number.  Try again...")
-        return {"EMPID": input_data}
+        return {"Age": input_data}

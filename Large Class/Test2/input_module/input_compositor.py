@@ -29,10 +29,8 @@ from input_sales import InputSales
 class InputCompositor(AbstractInput):
 	""" docstring for InputCompositor"""
 
-	def __init__(self, validator, view):
+	def __init__(self):
 		self.objects_dict = []
-		self.validator = validator
-		self.view = view
 
 	def input(self, data):
 		result_data = dict()

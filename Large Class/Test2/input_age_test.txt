@@ -17,5 +17,4 @@
 
 >>> from unittest.mock import patch
 >>> import builtins
-
 >>> with patch('builtins.input', return_value='16'):assert ctl.input_age() == {"Age": '16'}

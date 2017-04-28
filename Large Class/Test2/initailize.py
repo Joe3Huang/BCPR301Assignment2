@@ -1,2 +1,2 @@
 def init():
-    return '../../code'
+    return '..\..\code'
