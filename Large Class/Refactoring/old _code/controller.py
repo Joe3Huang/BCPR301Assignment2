@@ -4,10 +4,6 @@ from serialization import Serialization
 from graphy_display import Bar_chart
 from db import DB
 from abstract_controller import AbstractController
-from importlib.machinery import SourceFileLoader
-input = SourceFileLoader("input", os.getcwd(
-)+"//input_module//input.py").load_module()
-from input import InputCompositor, InputSales, InputSalary, InputGender, InputEmployeeId, InputBMI, InputBirthday, InputAge
 
 
 class Controller(AbstractController):
@@ -21,14 +17,6 @@ class Controller(AbstractController):
         self.serialization = Serialization()
         self.bar_chart = Bar_chart()
         self.db = DB("company.db")
-        self.input_compositor = InputCompositor()
-        self.input_compositor.add(InputSales(self.validator, self.__view))
-        self.input_compositor.add(InputSalary(self.validator, self.__view))
-        self.input_compositor.add(InputGender(self.validator, self.__view))
-        self.input_compositor.add(InputEmployeeId(self.validator, self.__view))
-        self.input_compositor.add(InputBMI(self.validator, self.__view))
-        self.input_compositor.add(InputBirthday(self.validator, self.__view))
-        self.input_compositor.add(InputAge(self.validator, self.__view))
 
     def print_all_data(self):
         try:
@@ -96,8 +84,6 @@ class Controller(AbstractController):
 
     def serialise_objects(self, path):
         try:
-            if os.path.exists(path) == False:
-                raise IOError
             if self.model.employees.__len__() != 0:
                 path += '/data.pickle'
                 sf = self.serialization.open(path, "wb")
@@ -129,7 +115,7 @@ class Controller(AbstractController):
             self.model.employees += list(new)
             for e in new:
                 self.__view.show(e)
-            f.close()
+            f.close() 
         except IOError:
             self.__view.show('error : wrong path')
         except ValueError:
@@ -145,7 +131,7 @@ class Controller(AbstractController):
                 except OSError:
                     pass
                 self.bar_chart.title = 'Salary by Age'
-                # self.bar_chart.delete('Salary')
+                self.bar_chart.delete('Salary')
                 self.bar_chart.add('Salary', self.model.get_all_salaries())
 
                 age_list = []
@@ -199,30 +185,101 @@ class Controller(AbstractController):
             self.__view.show('no data')
 
     def input_employee_id(self):
-        input_object = self.input_compositor.get_input_object(
-            'InputEmployeeId')
-        return input_object.input("Please input employee ID : ", "EMPID", self.validator.is_valid_employee_id)
+        while True:
+            try:
+                input_data = self.__view.input("Please input employee ID : ")
+                if self.validator.is_valid_employee_id(input_data):
+                    break
+                else:
+                    self.__view.show("That was no valid id.  Try again...")
+            except ValueError:
+                self.__view.show(
+                    "Oops!  That was no valid number.  Try again...")
+        return {"EMPID": input_data}
 
     def input_gender(self):
-        input_object = self.input_compositor.get_input_object('InputGender')
-        return input_object.input("Please input gender M/F : ", "Gender", self.validator.is_valid_gender)
+        while True:
+            try:
+                input_data = self.__view.input("Please input gender M/F : ")
+                if self.validator.is_valid_gender(input_data):
+                    break
+                else:
+                    self.__view.show("That was no valid input.  Try again...")
+            except ValueError:
+                self.__view.show(
+                    "Oops!  That was no valid number.  Try again...")
+        return {"Gender": input_data}
 
     def input_age(self):
-        input_object = self.input_compositor.get_input_object('InputAge')
-        return input_object.input("Please input two digit age : ", "Age", self.validator.is_valid_age)
+        while True:
+            try:
+                input_data = self.__view.input("Please input two digit age : ")
+                if self.validator.is_valid_age(input_data):
+                    break
+                else:
+                    self.__view.show("That was no valid input.  Try again...")
+            except ValueError:
+                self.__view.show(
+                    "Oops!  That was no valid number.  Try again...")
+        return {"Age": input_data}
 
     def input_sales(self):
-        input_object = self.input_compositor.get_input_object('InputSales')
-        return input_object.input("Please input three digit sales : ", "Sales", self.validator.is_valid_sales)
+        while True:
+            try:
+                input_data = self.__view.input(
+                    "Please input three digit sales : ")
+                if self.validator.is_valid_sales(input_data):
+                    break
+                else:
+                    self.__view.show("That was no valid input.  Try again...")
+            except ValueError:
+                self.__view.show(
+                    "Oops!  That was no valid number.  Try again...")
+        return {"Sales": input_data}
 
     def input_BMI(self):
-        input_object = self.input_compositor.get_input_object('InputBMI')
-        return input_object.input("Please select the BMI number:", "BMI", self.validator.is_valid_BMI)
+        options = ['Normal', 'Overweight', 'Obesity', 'Underweight']
+        for (i, item) in enumerate(options):
+            self.__view.show(i + 1, item)
+        while True:
+            try:
+                input_data = int(
+                    self.__view.input("Please select the BMI number:"))
+                if input_data >= 1 and input_data <= 4:
+                    input_data = options[input_data - 1]
+                if self.validator.is_valid_BMI(input_data):
+                    break
+                else:
+                    self.__view.show("That was no valid input.  Try again...")
+            except ValueError:
+                self.__view.show(
+                    "Oops!  That was no valid number.  Try again...")
+        return {"BMI": input_data}
 
     def input_salary(self):
-        input_object = self.input_compositor.get_input_object('InputSalary')
-        return input_object.input("Please input the 2or3 digit salary : ", "Salary", self.validator.is_valid_salary)
+        while True:
+            try:
+                input_data = self.__view.input(
+                    "Please input the 2or3 digit salary : ")
+                if self.validator.is_valid_salary(input_data):
+                    break
+                else:
+                    self.__view.show("That was no valid input.  Try again...")
+            except ValueError:
+                self.__view.show(
+                    "Oops!  That was no valid number.  Try again...")
+        return {"Salary": input_data}
 
     def input_birthday(self):
-        input_object = self.input_compositor.get_input_object('InputBirthday')
-        return input_object.input("Please input the birthday day-month-year : ", "Birthday", self.validator.is_valid_birthday)
+        prompt = "Please input the birthday day-month-year : "
+        while True:
+            try:
+                input_data = self.__view.input(prompt)
+                if self.validator.is_valid_birthday(input_data):
+                    break
+                else:
+                    self.__view.show("That was no valid input.  Try again...")
+            except ValueError:
+                self.__view.show(
+                    "Oops!  That was no valid number.  Try again...")
+        return {"Birthday": input_data}
