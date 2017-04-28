@@ -1,0 +1,34 @@
+>>> from initailize import init 
+>>> import os
+>>> import sys
+>>> sys.path.append(os.getcwd())
+>>> code_path = init()
+>>> sys.path.append(code_path)
+>>> from importlib.machinery import SourceFileLoader
+>>> controller = SourceFileLoader("controller", os.getcwd()+"//controller.py").load_module()
+>>> from controller import Controller
+>>> from cmd_view import CLI
+>>> from model import Model
+>>> cli = CLI()
+>>> model = Model()
+>>> ctl = Controller(cli, model)
+>>> cli.set_controller(ctl)
+
+
+#ok
+>>> path = os.getcwd();
+>>> path += '\\data.pickle';
+>>> ctl.pickle_load(path);
+G834,M,26,213,Overweight,566,04-12-1990
+
+#data error
+>>> path = os.getcwd();
+>>> path += '\\wrongData.pickle';
+>>> ctl.pickle_load(path);
+data error
+
+#wrong path
+>>> path = os.getcwd();
+>>> path += '\\wrongPath.txt';
+>>> ctl.pickle_load(path);
+error : wrong path

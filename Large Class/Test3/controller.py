@@ -6,29 +6,33 @@ from db import DB
 from abstract_controller import AbstractController
 from importlib.machinery import SourceFileLoader
 
-input_compositor = SourceFileLoader("input_compositor", os.getcwd()+"\\input_module\\input_compositor.py").load_module()
-from input_compositor import InputCompositor
-input_age = SourceFileLoader("input_age", os.getcwd(
-    )+"//input_module//input_age.py").load_module()
-from input_age import InputAge
-input_birthday = SourceFileLoader("input_birthday", os.getcwd(
-    )+"//input_module//input_birthday.py").load_module()
-from input_birthday import InputBirthday
-input_BMI = SourceFileLoader("input_BMI", os.getcwd(
-    )+"//input_module//input_BMI.py").load_module()
-from input_BMI import InputBMI
-input_employee_id = SourceFileLoader("input_employee_id", os.getcwd(
-    )+"//input_module//input_employee_id.py").load_module()
-from input_employee_id import InputEmployeeId
-input_gender = SourceFileLoader("input_gender", os.getcwd(
-    )+"//input_module//input_gender.py").load_module()
-from input_gender import InputGender
-input_salary = SourceFileLoader("input_salary", os.getcwd(
-    )+"//input_module//input_salary.py").load_module()
-from input_salary import InputSalary
-input_sales = SourceFileLoader("input_sales", os.getcwd(
-    )+"//input_module//input_sales.py").load_module()
-from input_sales import InputSales
+# input_compositor = SourceFileLoader("input_compositor", os.getcwd()+"\\input_module\\input_compositor.py").load_module()
+# from input_compositor import InputCompositor
+# input_age = SourceFileLoader("input_age", os.getcwd(
+#     )+"//input_module//input_age.py").load_module()
+# from input_age import InputAge
+# input_birthday = SourceFileLoader("input_birthday", os.getcwd(
+#     )+"//input_module//input_birthday.py").load_module()
+# from input_birthday import InputBirthday
+# input_BMI = SourceFileLoader("input_BMI", os.getcwd(
+#     )+"//input_module//input_BMI.py").load_module()
+# from input_BMI import InputBMI
+# input_employee_id = SourceFileLoader("input_employee_id", os.getcwd(
+#     )+"//input_module//input_employee_id.py").load_module()
+# from input_employee_id import InputEmployeeId
+# input_gender = SourceFileLoader("input_gender", os.getcwd(
+#     )+"//input_module//input_gender.py").load_module()
+# from input_gender import InputGender
+# input_salary = SourceFileLoader("input_salary", os.getcwd(
+#     )+"//input_module//input_salary.py").load_module()
+# from input_salary import InputSalary
+# input_sales = SourceFileLoader("input_sales", os.getcwd(
+#     )+"//input_module//input_sales.py").load_module()
+# from input_sales import InputSales
+
+input = SourceFileLoader("input", os.getcwd(
+    )+"//input_module//input.py").load_module()
+from input import InputCompositor, InputSales, InputSalary, InputGender, InputEmployeeId, InputBMI, InputBirthday, InputAge
 class Controller(AbstractController):
 
     """ docstring for Controller"""
@@ -239,7 +243,7 @@ class Controller(AbstractController):
 
     def input_salary(self):
         input_object= self.input_compositor.get_input_object('InputSalary')
-        return input_object.input()
+        return input_object.input("Please input the 2or3 digit salary : ", "Salary", self.validator.is_valid_salary)
 
     def input_birthday(self):
         input_object= self.input_compositor.get_input_object('InputBirthday')

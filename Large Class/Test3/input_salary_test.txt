@@ -1,0 +1,21 @@
+>>> from initailize import init 
+>>> import os
+>>> import sys
+>>> sys.path.append(os.getcwd())
+>>> code_path = init()
+>>> sys.path.append(code_path)
+>>> from cmd_view import CLI
+>>> from importlib.machinery import SourceFileLoader
+>>> controller = SourceFileLoader("controller", os.getcwd()+"//controller.py").load_module()
+>>> from controller import Controller
+>>> from model import Model
+>>> cli = CLI()
+>>> model = Model()
+>>> ctl = Controller(cli, model)
+>>> cli.set_controller(ctl)
+
+
+>>> from unittest.mock import patch
+>>> import builtins
+
+>>> with patch('builtins.input', return_value='500'):assert ctl.input_salary() == {"Salary": '500'}

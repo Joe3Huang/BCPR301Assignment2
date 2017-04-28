@@ -1,0 +1,26 @@
+>>> from initailize import init 
+>>> import os
+>>> import sys
+>>> sys.path.append(os.getcwd())
+>>> code_path = init()
+>>> sys.path.append(code_path)
+>>> from importlib.machinery import SourceFileLoader
+>>> controller = SourceFileLoader("controller", os.getcwd()+"//controller.py").load_module()
+>>> from controller import Controller
+>>> from cmd_view import CLI
+>>> from model import Model
+>>> cli = CLI()
+>>> model = Model()
+>>> ctl = Controller(cli, model)
+>>> cli.set_controller(ctl)
+>>> path = os.getcwd();
+>>> path += '\\testData.txt';
+>>> ctl.load_file(path)
+success
+>>> path = os.getcwd();
+>>> path += '\\wrongTestData.txt';
+>>> ctl.load_file(path)
+invalid data detected
+success
+
+
