@@ -1,5 +1,4 @@
 from datetime import date, datetime
-#from dateutil.parser import parse
 
 
 class Employee(object):
@@ -12,7 +11,8 @@ class Employee(object):
         self.sales = self.parameter_object['Sales']
         self.BMI = self.parameter_object['BMI']
         self.salary = self.parameter_object['Salary']
-        self.birthday = datetime.strptime(self.parameter_object['Birthday'], '%d-%m-%Y')
+        self.birthday = datetime.strptime(
+            self.parameter_object['Birthday'], '%d-%m-%Y')
 
     def __str__(self):
         txt = self.id + ',' + self.gender + ',' + \
