@@ -1,4 +1,5 @@
 >>> from employee import Employee 
->>> person = Employee('A123', 'M', '34', '23', 'Normal', '12', '1-1-1991')
+>>> parameter_object = {'Id':'A123', 'Gender':'M', 'Age':'34', 'Sales':'23', 'BMI':'Normal', 'Salary':'12', 'Birthday':'1-1-1991'}
+>>> person = Employee(parameter_object)
 >>> print(person)
 A123,M,34,23,Normal,12,01-01-1991

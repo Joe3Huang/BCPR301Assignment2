@@ -4,14 +4,14 @@ from datetime import date, datetime
 
 class Employee(object):
 
-    def __init__(self, id='E123', gender='male', age=11, sales=123, bmi='normal', salary=123, birthday=date.today()):
-        self.id = id
-        self.gender = gender
-        self.age = age
-        self.sales = sales
-        self.BMI = bmi
-        self.salary = salary
-        self.birthday = datetime.strptime(birthday, '%d-%m-%Y')
+    def __init__(self, parameter_object):
+        self.id = parameter_object['Id']
+        self.gender = parameter_object['Gender']
+        self.age = parameter_object['Age']
+        self.sales = parameter_object['Sales']
+        self.BMI = parameter_object['BMI']
+        self.salary = parameter_object['Salary']
+        self.birthday = datetime.strptime(parameter_object['Birthday'], '%d-%m-%Y')
 
     def __str__(self):
         txt = self.id + ',' + self.gender + ',' + \

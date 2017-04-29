@@ -17,8 +17,9 @@ class Model(object):
     def add_the_employee(self, data):
         result = ""
         sign   = True
-        new_employee = Employee(data['EMPID'], data['Gender'], data['Age'], data[
-                                'Sales'], data['BMI'], data['Salary'], data['Birthday'])
+        # new_employee = Employee(data['EMPID'], data['Gender'], data['Age'], data[
+        #                         'Sales'], data['BMI'], data['Salary'], data['Birthday'])
+        new_employee = Employee(data)
         for e in self.employees:
             if e.id == new_employee.id:
                 result = "unique constraint failed"
