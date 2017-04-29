@@ -2,14 +2,21 @@
 from abc import ABCMeta, abstractmethod
 import datetime
 
-#abstract factory
-class AbstractCheck(metaclass=ABCMeta):
+# abstract factory
+
+
+class AbstractChecker(metaclass=ABCMeta):
+    """AbstractChecker"""
     @abstractmethod
     def check(self, data):
         pass
-#singeton class inherit from AbstractCheck
+# singeton class inherit from AbstractChecker
+
+
 class EmployeeIdChecker(object):
-    class __EmployeeIdChecker(AbstractCheck):
+
+    class __EmployeeIdChecker(AbstractChecker):
+
         def check(self, input_data):
             result = False
             if input_data.__len__() > 0:
@@ -24,14 +31,19 @@ class EmployeeIdChecker(object):
                     result = False
             return result
     instance = None
+
     def __init__(self):
         if not EmployeeIdChecker.instance:
             EmployeeIdChecker.instance = EmployeeIdChecker.__EmployeeIdChecker()
+
     def __getattr__(self, name):
         return getattr(self.instance, name)
 
+
 class GenderChecker(object):
-    class __GenderChecker(AbstractCheck):
+
+    class __GenderChecker(AbstractChecker):
+
         def check(self, input_data):
             result = False
             if input_data == 'M' or input_data == 'F':
@@ -40,14 +52,19 @@ class GenderChecker(object):
                 result = False
             return result
     instance = None
+
     def __init__(self):
         if not GenderChecker.instance:
             GenderChecker.instance = GenderChecker.__GenderChecker()
+
     def __getattr__(self, name):
         return getattr(self.instance, name)
 
+
 class AgeChecker(object):
-    class __AgeChecker(AbstractCheck):
+
+    class __AgeChecker(AbstractChecker):
+
         def check(self, input_data):
             result = False
             if input_data.isdigit() and input_data.__len__() == 2:
@@ -56,14 +73,19 @@ class AgeChecker(object):
                 result = False
             return result
     instance = None
+
     def __init__(self):
         if not AgeChecker.instance:
             AgeChecker.instance = AgeChecker.__AgeChecker()
+
     def __getattr__(self, name):
         return getattr(self.instance, name)
 
+
 class SalesChecker(object):
-    class __SalesChecker(AbstractCheck):
+
+    class __SalesChecker(AbstractChecker):
+
         def check(self, input_data):
             result = False
             if input_data.isdigit() and input_data.__len__() == 3:
@@ -72,14 +94,19 @@ class SalesChecker(object):
                 result = False
             return result
     instance = None
+
     def __init__(self):
         if not SalesChecker.instance:
             SalesChecker.instance = SalesChecker.__SalesChecker()
+
     def __getattr__(self, name):
         return getattr(self.instance, name)
 
+
 class BMIChecker(object):
-    class __BMIChecker(AbstractCheck):
+
+    class __BMIChecker(AbstractChecker):
+
         def check(self, input_data):
             result = False
             options = ['Normal', 'Overweight', 'Obesity', 'Underweight']
@@ -89,14 +116,19 @@ class BMIChecker(object):
                 result = False
             return result
     instance = None
+
     def __init__(self):
         if not BMIChecker.instance:
             BMIChecker.instance = BMIChecker.__BMIChecker()
+
     def __getattr__(self, name):
         return getattr(self.instance, name)
 
+
 class SalaryChecker(object):
-    class __SalaryChecker(AbstractCheck):
+
+    class __SalaryChecker(AbstractChecker):
+
         def check(self, input_data):
             result = False
             if input_data.isdigit() and input_data.__len__() >= 2 and input_data.__len__() <= 3:
@@ -105,14 +137,19 @@ class SalaryChecker(object):
                 result = False
             return result
     instance = None
+
     def __init__(self):
         if not SalaryChecker.instance:
             SalaryChecker.instance = SalaryChecker.__SalaryChecker()
+
     def __getattr__(self, name):
         return getattr(self.instance, name)
 
+
 class BirthdayChecker(object):
-    class __BirthdayChecker(AbstractCheck):
+
+    class __BirthdayChecker(AbstractChecker):
+
         def check(self, input_data):
             result = False
             try:
@@ -128,11 +165,14 @@ class BirthdayChecker(object):
             except ValueError:
                 return False
     instance = None
+
     def __init__(self):
         if not BirthdayChecker.instance:
             BirthdayChecker.instance = BirthdayChecker.__BirthdayChecker()
+
     def __getattr__(self, name):
         return getattr(self.instance, name)
+
 
 class Validator(object):
 
@@ -166,7 +206,7 @@ class Validator(object):
     def is_valid_birthday(self, input_data):
         checker = BirthdayChecker()
         return checker.check(input_data)
-            
+
     def is_load_data(self, input_data):
         result = 0
         data = input_data.split(',')
@@ -189,4 +229,3 @@ class Validator(object):
             return True
         else:
             return False
-
