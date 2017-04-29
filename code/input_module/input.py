@@ -27,7 +27,7 @@ class InputCompositor(AbstractInput):
     def __init__(self):
         self.objects_dict = []
 
-    def input(self, data):
+    def input(self):
         result_data = dict()
         for obj in self.objects_dict:
             input_data.update(obj.input)

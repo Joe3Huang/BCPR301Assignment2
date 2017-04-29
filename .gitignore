@@ -3,4 +3,4 @@
 # compiled output
 /code/__pycache__
 /Large Class/__pycache__
-
+*__pycache__

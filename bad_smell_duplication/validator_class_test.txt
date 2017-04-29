@@ -1,0 +1,20 @@
+>>> import datetime
+>>> from validator import Validator
+>>> v = Validator()
+>>> v.is_valid_employee_id('V123')
+True
+>>> v.is_valid_gender("m")
+False
+>>> v.is_valid_age("23")
+True
+>>> v.is_valid_sales("12")
+False
+>>> v.is_valid_salary("1234")
+False
+>>> v.is_valid_BMI("fit")
+False
+>>> v.is_valid_birthday("12-13-1991")
+False
+
+
+
