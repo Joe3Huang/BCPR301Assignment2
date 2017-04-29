@@ -1,0 +1,4 @@
+>>> from employee import Employee 
+>>> person = Employee('A123', 'M', '34', '23', 'Normal', '12', '1-1-1991')
+>>> print(person)
+A123,M,34,23,Normal,12,01-01-1991
