@@ -1,6 +1,50 @@
 
+from abc import ABCMeta, abstractmethod
 import datetime
 
+#abstract factory
+class AbstractCheck(metaclass=ABCMeta):
+    @abstractmethod
+    def check(self, data):
+        pass
+#singeton class inherit from AbstractCheck
+class EmployeeIdChecker(object):
+    class __EmployeeIdChecker(AbstractCheck):
+        def check(self, input_data):
+            result = False
+            if input_data.__len__() > 0:
+                num_ascii = ord(input_data[0])
+                if num_ascii > 64 and num_ascii < 91:
+                    int_digit = input_data[1::]
+                    if int_digit.isdigit() and int_digit.__len__() == 3:
+                        result = True
+                    else:
+                        result = False
+                else:
+                    result = False
+            return result
+    instance = None
+    def __init__(self):
+        if not EmployeeIdChecker.instance:
+            EmployeeIdChecker.instance = EmployeeIdChecker.__EmployeeIdChecker()
+    def __getattr__(self, name):
+        return getattr(self.instance, name)
+
+class GenderChecker(object):
+    class __GenderChecker(AbstractCheck):
+        def check(self, input_data):
+            result = False
+            if input_data == 'M' or input_data == 'F':
+                result = True
+            else:
+                result = False
+            return result
+    instance = None
+    def __init__(self):
+        if not GenderChecker.instance:
+            GenderChecker.instance = GenderChecker.__GenderChecker()
+    def __getattr__(self, name):
+        return getattr(self.instance, name)
 
 class Validator(object):
 
@@ -8,30 +52,12 @@ class Validator(object):
     # def __init__(self):
 
     def is_valid_employee_id(self, input_data):
-        result = False
-        if input_data.__len__() > 0:
-            num_ascii = ord(input_data[0])
-            if num_ascii > 64 and num_ascii < 91:
-                int_digit = input_data[1::]
-                # print(int_digit)
-                # print(int_digit.__len__())
-                if int_digit.isdigit() and int_digit.__len__() == 3:
-                    result = True
-                else:
-                    result = False
-            else:
-                result = False
-        # print(input_data)
-        return result
+        checker = EmployeeIdChecker()
+        return checker.check(input_data)
 
     def is_valid_gender(self, input_data):
-
-        result = False
-        if input_data == 'M' or input_data == 'F':
-            result = True
-        else:
-            result = False
-        return result
+        checker = GenderChecker()
+        return checker.check(input_data)
 
     def is_valid_age(self, input_data):
         result = False
