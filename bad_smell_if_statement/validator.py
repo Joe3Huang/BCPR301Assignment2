@@ -210,7 +210,8 @@ class Validator(object):
 
     def is_load_data(self, input_data):
         result = True
-        checker_list = ['EmployeeIdChecker', 'GenderChecker', 'AgeChecker', 'SalesChecker','BMIChecker', 'SalaryChecker', 'BirthdayChecker']
+        checker_list = ['EmployeeIdChecker', 'GenderChecker', 'AgeChecker',
+                        'SalesChecker', 'BMIChecker', 'SalaryChecker', 'BirthdayChecker']
         datas = input_data.split(',')
         if(datas.__len__() == 7):
             for index, date in enumerate(datas):
