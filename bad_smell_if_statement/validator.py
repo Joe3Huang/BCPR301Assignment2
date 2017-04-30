@@ -218,4 +218,6 @@ class Validator(object):
                 checker = getattr(validator, checker_list[index])()
                 if checker.check(date) == False:
                     result = False
+        else:
+            result = False
         return result

@@ -6,7 +6,7 @@ class Employee(object):
 
     def __init__(self, parameter_object):
         self.parameter_object = parameter_object
-        self.id = self.parameter_object['Id']
+        self.id = self.parameter_object['EMPID']
         self.gender = self.parameter_object['Gender']
         self.age = self.parameter_object['Age']
         self.sales = self.parameter_object['Sales']

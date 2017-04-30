@@ -1,6 +1,7 @@
 
 from abc import ABCMeta, abstractmethod
 import datetime
+import validator
 
 # abstract factory
 
@@ -208,24 +209,14 @@ class Validator(object):
         return checker.check(input_data)
 
     def is_load_data(self, input_data):
-        result = 0
-        data = input_data.split(',')
-        if(data.__len__() == 7):
-            if(self.is_valid_employee_id(data[0])):
-                result += 1
-            if(self.is_valid_gender(data[1])):
-                result += 1
-            if(self.is_valid_age(data[2])):
-                result += 1
-            if(self.is_valid_sales(data[3])):
-                result += 1
-            if(self.is_valid_BMI(data[4])):
-                result += 1
-            if(self.is_valid_salary(data[5])):
-                result += 1
-            if(self.is_valid_birthday(data[6])):
-                result += 1
-        if(result == 7):
-            return True
+        result = True
+        checker_list = ['EmployeeIdChecker', 'GenderChecker', 'AgeChecker',
+                        'SalesChecker', 'BMIChecker', 'SalaryChecker', 'BirthdayChecker']
+        datas = input_data.split(',')
+        if(datas.__len__() == 7):
+            for index, date in enumerate(datas):
+                if getattr(validator, checker_list[index])().check(date) == False:
+                    result = False
         else:
-            return False
+            result = False
+        return result
